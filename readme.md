@@ -109,3 +109,17 @@ UID:Event_1@reyhome.com
 END:VEVENT
 END:VCALENDAR
 ```
+
+* Errors code
+```
+* 600 => PathIcalException => Path to ical is not define in array data of ical object.
+* 601 => ProIDException => ProID is not define in array data of ical object.
+* 602 => VersionException => Version is not define in array data of ical object.
+* 603 => MethodException => Method is not define in array data of ical object.
+* 604 => NameException => Name is not define in array data of ical object.
+
+* 605 => BeginException => Beginning date of event is not define in array event.
+* 606 => EndException => Ending date of event is not define in array event.
+* 607 => SummaryException => Summary of event is not define in array event.
+* 608 => UIDException => UID of event is not define in array event.
+```
