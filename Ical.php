@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * Ical Exception
+ */
+
+include 'Exceptions/Ical/PathIcalException.php';
+include 'Exceptions/Ical/ProIDException.php';
+include 'Exceptions/Ical/VersionException.php';
+include 'Exceptions/Ical/MethodException.php';
+include 'Exceptions/Ical/NameException.php';
+
 class Ical
 {
     private string $name;
@@ -15,20 +25,20 @@ class Ical
      * @throws Exception
      */
     public function __construct(array $Data){
-        if ($Data['patchIcal'] == null){
-            throw new Exception('Ical patch required');
+        if (!array_key_exists('patchIcal',$Data)){
+            throw new PathIcalException();
         }
-        if ($Data['proID'][0] == null || $Data['proID'][1] == null){
-            throw new Exception('Pro ID required');
+        if (!array_key_exists('proID',$Data)){
+            throw new ProIDException();
         }
-        if ($Data['Version'] ==null){
-            throw new Exception('Version is required');
+        if (!array_key_exists('Version',$Data)){
+            throw new VersionException();
         }
-        if ($Data['Method'] == null){
-            throw new Exception('Method is required');
+        if (!array_key_exists('Method', $Data)){
+            throw new MethodException();
         }
-        if ($Data['Name'] == null){
-            throw new Exception('Name is required');
+        if (!array_key_exists('Name',$Data)){
+            throw new NameException();
         }
 
         $this->pathIcalSave = $Data['patchIcal'];
@@ -121,6 +131,15 @@ class Ical
     }
 }
 
+/*
+ * Event Exception
+ */
+include 'Exceptions/Event/BeginException.php';
+include 'Exceptions/Event/EndException.php';
+include 'Exceptions/Event/SummaryException.php';
+include 'Exceptions/Event/UIDException.php';
+
+
 class EventIcal{
     private string $DateStart;
     private string $DateEnd;
@@ -132,6 +151,18 @@ class EventIcal{
      * @throws Exception
      */
     public function __construct($Data){
+        if (!array_key_exists('Begin',$Data)){
+            throw new BeginException();
+        }
+        if (!array_key_exists('End',$Data)){
+            throw new EndException();
+        }
+        if (!array_key_exists('Summary',$Data)){
+            throw new SummaryException();
+        }
+        if (!array_key_exists('UID',$Data)){
+            throw new UIDException();
+        }
         $this->DateStart = $Data['Begin'];
         $this->DateEnd = $Data['End'];
         $this->Summary = $Data['Summary'];
